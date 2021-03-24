@@ -1,19 +1,26 @@
-import React, { useState, Component } from 'react';
+import React, { useState, Component, PureComponent } from 'react';
 import RocketCore from './RocketCore';
 
-export function FunctionalRocket() {
+// export function FunctionalRocket() {
+//   const [initialLaunchTime] = useState(Date.now());
+//   console.log(FunctionalRocket);
+//   return <RocketCore initialLaunchTime={initialLaunchTime} />;
+// }
+
+const FunctionalRocket = React.memo(function FunctionalRocket() {
   const [initialLaunchTime] = useState(Date.now());
-
+  console.log(FunctionalRocket);
   return <RocketCore initialLaunchTime={initialLaunchTime} />;
-}
+});
 
-export class ClassRocket extends Component {
+export class ClassRocket extends PureComponent {
   constructor() {
     super();
 
     this.state = {
-      initialLaunchTime: Date.now()
+      initialLaunchTime: Date.now(),
     };
+    console.log(this.state);
   }
 
   render() {
@@ -22,3 +29,5 @@ export class ClassRocket extends Component {
     return <RocketCore initialLaunchTime={initialLaunchTime} />;
   }
 }
+
+export { FunctionalRocket };
